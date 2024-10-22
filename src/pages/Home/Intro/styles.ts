@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Wrapper } from '../../styles/global';
-import { typography } from '../../styles/typography';
-import bg from '../../assets/background.png';
+import { Wrapper } from '../../../styles/global';
+import { typography } from '../../../styles/typography';
+import bg from '../../../assets/background.png';
 
 const BADGE_COLORS = {
   yellowDark: 'yellow-dark',

@@ -2,7 +2,7 @@ import { ShoppingCart, Timer, Package, Coffee } from "phosphor-react";
 
 import { Container, ItemsContainer, Image, Item, TextContainer, Background } from "./styles";
 
-import img from "../../assets/intro-coffee.svg";
+import img from "../../../assets/intro-coffee.svg";
 
 const Intro = () => {
   return (
