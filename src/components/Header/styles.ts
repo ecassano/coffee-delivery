@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { typography } from "../../styles/typography";
+import styled from 'styled-components';
+import { typography } from '../../styles/typography';
 
 export const Container = styled.header`
   max-width: 1160px;
-  padding: 32px 160px;
+  padding: 32px 10%;
   margin: 0 auto;
 
   display: flex;
@@ -24,16 +24,21 @@ export const Nav = styled.nav`
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
-    background: ${(props) => props.theme.colors["purple-light"]};
-    padding: 0.5rem;
+    background: ${props => props.theme.colors['purple-light']};
+    padding: 0.625rem 0.5rem;
     border-radius: 6px;
-    color: ${(props) => props.theme.colors["purple-dark"]};
+    color: ${props => props.theme.colors['purple-dark']};
 
     p {
       ${typography.fonts.textS}
     }
+  }
 
-    a {
-    }
+  a {
+    background: ${props => props.theme.colors['yellow-light']};
+    color: ${props => props.theme.colors['yellow-dark']};
+    padding: 0.5rem;
+    border-radius: 6px;
+    line-height: 0;
   }
 `;
