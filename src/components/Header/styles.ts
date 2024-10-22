@@ -1,11 +1,8 @@
 import styled from 'styled-components';
+import { Wrapper } from '../../styles/global';
 import { typography } from '../../styles/typography';
 
-export const Container = styled.header`
-  max-width: 1160px;
-  padding: 32px 10%;
-  margin: 0 auto;
-
+export const Container = styled(Wrapper).attrs({ as: 'header' })`
   display: flex;
   justify-content: space-between;
 

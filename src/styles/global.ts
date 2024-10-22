@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { typography } from "./typography";
+import styled, { createGlobalStyle } from 'styled-components';
+import { typography } from './typography';
 
 export const GlobalStyle = createGlobalStyle`
     *{
@@ -9,8 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body{
-        background: ${(props) => props.theme.colors.background};
-        color: ${(props) => props.theme.colors["base-text"]};
+        background: ${props => props.theme.colors.background};
+        color: ${props => props.theme.colors['base-text']};
         -webkit-font-smoothing: antialiased;
     }
 
@@ -22,4 +22,10 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         cursor: pointer;
     }
+`;
+
+export const Wrapper = styled.div`
+  max-width: 1160px;
+  padding: 32px 0px;
+  margin: 0 auto;
 `;
