@@ -1,6 +1,8 @@
 import { coffees } from '../../../../data.json';
+import Card from '../../../components/Card';
+import { CoffeeListContainer, Container, Title } from './styles';
 
-interface Coffee {
+export interface Coffee {
   id: string;
   title: string;
   description: string;
@@ -11,10 +13,12 @@ interface Coffee {
 
 const CoffeeList = () => {
   return (
-    <div>
-      <h2>Nossos cafés</h2>
-      {coffees.map((coffee: Coffee) => <h3>{coffee.title}</h3>)}
-    </div>
+    <Container>
+      <Title>Nossos cafés</Title>
+      <CoffeeListContainer>
+        {coffees.map(coffee => <Card key={coffee.id} {...coffee} />)}
+      </CoffeeListContainer>
+    </Container>
   )
 }
 

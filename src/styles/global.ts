@@ -26,6 +26,6 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Wrapper = styled.div`
   max-width: 1160px;
-  padding: 32px 0px;
+  padding: 32px 0.5rem;
   margin: 0 auto;
 `;
