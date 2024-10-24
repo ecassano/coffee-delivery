@@ -15,7 +15,7 @@ const Card = (data: Coffee) => {
       <Title>{title}</Title>
       <Description>{description}</Description>
       <Controls>
-        <Price>R$ <strong>{price}</strong></Price>
+        <Price>R$ <strong>{price.toFixed(2)}</strong></Price>
         <Order>
           <QuantityInput />
           <button><ShoppingCart weight="fill" size={22} /></button>
