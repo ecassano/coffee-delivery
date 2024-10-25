@@ -187,3 +187,13 @@ export const Total = styled(BaseTotal)`
   ${typography.fonts.textL}
   font-weight: bold;
 `;
+
+export const ConfirmButton = styled.button`
+  background: ${props => props.theme.colors.yellow};
+  margin-top: 1.5rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 6px;
+  color: ${props => props.theme.colors.white};
+  text-transform: uppercase;
+  ${typography.fonts.buttonG}
+`;

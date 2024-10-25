@@ -2,7 +2,7 @@ import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from "phos
 import QuantityInput from "../../components/Form/QuantityInput"
 import Radio from "../../components/Form/Radio"
 import TextInput from "../../components/Form/TextInput"
-import { AddressForm, Container, FormsContainer, Forms, InfoContainer, InputsContainer, PaymentForm, RadiosContainer, Title, OrderContainer, Order, CoffeeCard, CoffeeInfoContainer, Info, Image, RemoveButton, Divider, TotalInfoContainer, Subtotal, Total } from "./styles"
+import { AddressForm, Container, FormsContainer, Forms, InfoContainer, InputsContainer, PaymentForm, RadiosContainer, Title, OrderContainer, Order, CoffeeCard, CoffeeInfoContainer, Info, Image, RemoveButton, Divider, TotalInfoContainer, Subtotal, Total, ConfirmButton } from "./styles"
 import { Fragment } from "react/jsx-runtime"
 import { Coffee } from "../Home/CoffeeList"
 
@@ -128,6 +128,7 @@ const Cart = () => {
               <span>R$ 33,20</span>
             </Total>
           </TotalInfoContainer>
+          <ConfirmButton>confirmar pedido</ConfirmButton>
         </Order>
       </OrderContainer>
     </Container >
