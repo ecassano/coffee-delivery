@@ -6,6 +6,11 @@ import { Container, Nav } from "./styles";
 import logo from "../../assets/logo.svg";
 
 const Header = () => {
+  const cart = [
+    'item1',
+    'item2'
+  ];
+
   return (
     <Container>
       <Link to="/">
@@ -20,6 +25,7 @@ const Header = () => {
 
         <Link to="/cart">
           <ShoppingCart size={22} weight="fill" />
+          {cart.length > 0 ? <span>{cart.length}</span> : null}
         </Link>
       </Nav>
     </Container>

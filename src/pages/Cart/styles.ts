@@ -196,4 +196,8 @@ export const ConfirmButton = styled.button`
   color: ${props => props.theme.colors.white};
   text-transform: uppercase;
   ${typography.fonts.buttonG}
+
+  &:hover {
+    background: ${props => props.theme.colors['yellow-dark']};
+  }
 `;

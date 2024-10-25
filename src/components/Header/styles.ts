@@ -37,5 +37,22 @@ export const Nav = styled.nav`
     padding: 0.5rem;
     border-radius: 6px;
     line-height: 0;
+    position: relative;
+
+    > span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 0.625rem;
+      background: ${props => props.theme.colors['yellow-dark']};
+      ${typography.fonts.textS}
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: ${props => props.theme.colors.white};
+    }
   }
 `;
