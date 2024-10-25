@@ -4,12 +4,15 @@ import { MapPin, ShoppingCart } from "phosphor-react";
 import { Container, Nav } from "./styles";
 
 import logo from "../../assets/logo.svg";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartProvider";
 
 const Header = () => {
-  const cart = [
-    'item1',
-    'item2'
-  ];
+  const { cart } = useContext(CartContext);
+
+  const itemsQtd = cart.reduce((total, item) => {
+    return total += item.qtd
+  }, 0)
 
   return (
     <Container>
@@ -25,7 +28,7 @@ const Header = () => {
 
         <Link to="/cart">
           <ShoppingCart size={22} weight="fill" />
-          {cart.length > 0 ? <span>{cart.length}</span> : null}
+          {cart.length > 0 ? <span>{itemsQtd}</span> : null}
         </Link>
       </Nav>
     </Container>

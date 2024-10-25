@@ -4,14 +4,6 @@ import Radio from "../../components/Form/Radio"
 import TextInput from "../../components/Form/TextInput"
 import { AddressForm, Container, FormsContainer, Forms, InfoContainer, InputsContainer, PaymentForm, RadiosContainer, Title, OrderContainer, Order, CoffeeCard, CoffeeInfoContainer, Info, Image, RemoveButton, Divider, TotalInfoContainer, Subtotal, Total, ConfirmButton } from "./styles"
 import { Fragment } from "react/jsx-runtime"
-import { Coffee } from "../Home/CoffeeList"
-
-interface CoffeeOrder extends Coffee {
-  qtd: number;
-}
-interface Props {
-  items: CoffeeOrder[];
-}
 
 const items = [
   {
@@ -104,7 +96,9 @@ const Cart = () => {
                   <Info>
                     <h4>{item.title}</h4>
                     <div>
-                      <QuantityInput />
+                      <QuantityInput
+
+                      />
                       <RemoveButton><Trash size={16} /><p>Remover</p></RemoveButton>
                     </div>
                   </Info>
