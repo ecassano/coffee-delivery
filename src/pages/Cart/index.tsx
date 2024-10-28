@@ -4,31 +4,42 @@ import Radio from "../../components/Form/Radio"
 import TextInput from "../../components/Form/TextInput"
 import { AddressForm, Container, FormsContainer, Forms, InfoContainer, InputsContainer, PaymentForm, RadiosContainer, Title, OrderContainer, Order, CoffeeCard, CoffeeInfoContainer, Info, Image, RemoveButton, Divider, TotalInfoContainer, Subtotal, Total, ConfirmButton } from "./styles"
 import { Fragment } from "react/jsx-runtime"
+import { useContext } from "react"
+import { CartContext } from "../../contexts/CartProvider"
+import { coffees } from "../../../data.json";
+import { CoffeeInCart } from "../../@types/types"
 
-const items = [
-  {
-    id: "0",
-    title: "Expresso Tradicional",
-    description: "O tradicional café feito com água quente e grãos moídos",
-    tags: [
-      "tradicional"
-    ],
-    price: 9.90,
-    image: "/images/coffees/expresso.png"
-  },
-  {
-    id: "2",
-    title: "Expresso Cremoso",
-    description: "Café expresso tradicional com espuma cremosa",
-    tags: [
-      "tradicional"
-    ],
-    price: 9.90,
-    image: "/images/coffees/expresso-cremoso.png"
-  },
-]
+const deliveryPrice = 3.5;
 
 const Cart = () => {
+  const { cart, removeItem, incrementItemQtd, decrementItemQtd } = useContext(CartContext);
+
+  const coffeesInCart: CoffeeInCart[] = cart.map(item => {
+    const coffeeInfo = coffees.find(coffee => coffee.id === item.id);
+
+    if (!coffeeInfo) {
+      throw new Error('Invalid coffee');
+    }
+
+    return { ...coffeeInfo, qtd: item.qtd };
+  });
+
+  const cartTotal = coffeesInCart.reduce((total, item) => {
+    return total += item.qtd * item.price;
+  }, 0)
+
+  const handleIncrementItemQtd = (id: string) => {
+    incrementItemQtd(id);
+  }
+
+  const handleDecrementItemQtd = (id: string) => {
+    decrementItemQtd(id);
+  }
+
+  const handleRemoveItem = (id: string) => {
+    removeItem(id);
+  }
+
   return (
     <Container>
       <FormsContainer>
@@ -88,7 +99,7 @@ const Cart = () => {
       <OrderContainer>
         <Title>Cafés selecionados</Title>
         <Order>
-          {items.map(item => (
+          {coffeesInCart.map(item => (
             <Fragment key={item.id}>
               <CoffeeCard>
                 <CoffeeInfoContainer>
@@ -97,9 +108,11 @@ const Cart = () => {
                     <h4>{item.title}</h4>
                     <div>
                       <QuantityInput
-
+                        qtd={item.qtd}
+                        increment={handleIncrementItemQtd.bind(this, item.id)}
+                        decrement={handleDecrementItemQtd.bind(this, item.id)}
                       />
-                      <RemoveButton><Trash size={16} /><p>Remover</p></RemoveButton>
+                      <RemoveButton onClick={handleRemoveItem.bind(this, item.id)}><Trash size={16} /><p>Remover</p></RemoveButton>
                     </div>
                   </Info>
                 </CoffeeInfoContainer>
@@ -111,15 +124,15 @@ const Cart = () => {
           <TotalInfoContainer>
             <Subtotal>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>R$ {cartTotal.toFixed(2).toString()}</span>
             </Subtotal>
             <Subtotal>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>R$ {cart.length > 0 ? deliveryPrice.toFixed(2) : "0.00"}</span>
             </Subtotal>
             <Total>
               <span>Total</span>
-              <span>R$ 33,20</span>
+              <span>R$ {cart.length > 0 ? (cartTotal + deliveryPrice).toFixed(2).toString() : "0.00"}</span>
             </Total>
           </TotalInfoContainer>
           <ConfirmButton>confirmar pedido</ConfirmButton>

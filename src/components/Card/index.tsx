@@ -1,7 +1,7 @@
 import { ShoppingCart } from "phosphor-react";
 import { useContext, useState } from "react";
+import { Coffee } from "../../@types/types";
 import { CartContext } from "../../contexts/CartProvider";
-import { Coffee } from "../../pages/Home/CoffeeList";
 import QuantityInput from "../Form/QuantityInput";
 import { CardContainer, Controls, Description, Image, Order, Price, Tags, Title } from "./styles";
 

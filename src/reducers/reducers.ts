@@ -25,6 +25,26 @@ export const cartReducer = (state: CartState, action: Actions) => {
       return produce(state, draft => {
         draft.cart = draft.cart.filter(item => item.id !== action.payload.id);
       });
+    case ActionTypes.INCREMENT_ITEM_QTD:
+      return produce(state, draft => {
+        draft.cart.forEach(item => {
+          if (item.id === action.payload.id) {
+            item.qtd += 1;
+          }
+        });
+      });
+    case ActionTypes.DECREMENT_ITEM_QTD:
+      return produce(state, draft => {
+        draft.cart.forEach(item => {
+          if (item.id === action.payload.id) {
+            if (item.qtd <= 1) {
+              item.qtd = 1;
+              return;
+            }
+            item.qtd -= 1;
+          }
+        });
+      });
 
     default:
       return state;
