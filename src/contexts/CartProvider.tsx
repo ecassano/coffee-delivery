@@ -7,6 +7,7 @@ import { cartReducer } from "../reducers/reducers";
 
 interface CartContextType {
   cart: Item[];
+  orders: OrderInfo[];
   addItem: (item: Item) => void;
   removeItem: (id: string) => void;
   incrementItemQtd: (id: string) => void;
@@ -47,7 +48,7 @@ export const CartContextProvider = ({
   }
 
   return (
-    <CartContext.Provider value={{ cart: cartState.cart, addItem, removeItem, incrementItemQtd, decrementItemQtd, checkout }}>
+    <CartContext.Provider value={{ cart: cartState.cart, orders: cartState.orders, addItem, removeItem, incrementItemQtd, decrementItemQtd, checkout }}>
       {children}
     </CartContext.Provider>
   );

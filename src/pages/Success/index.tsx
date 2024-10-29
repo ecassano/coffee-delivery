@@ -3,8 +3,20 @@ import { Item } from "../Home/Intro/styles"
 import { Container, ItemInfoContainer, ItemsContainer, Image, TitleContainer } from "./styles"
 import img from "../../assets/success-illustration.svg";
 import { InfoContainer } from "../Cart/styles";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartProvider";
 
 const Success = () => {
+  const { orders } = useContext(CartContext);
+
+  const lastOrder = orders[orders.length - 1];
+
+  const paymentMethod = {
+    credit: 'Cartão de crédito',
+    debit: 'Cartão de débito',
+    cash: 'Dinheiro',
+  }
+
   return (
     <Container>
       <TitleContainer>
@@ -16,8 +28,8 @@ const Success = () => {
           <Item variant="purple">
             <span><MapPin size={16} weight="fill" /></span>
             <div>
-              <p>Entrega em Rua João Daniel Martinelli, 102</p>
-              <p>Jacarepaguá - Rio de Janeiro, RJ</p>
+              <p>Entrega em {lastOrder.street}, {lastOrder.number}</p>
+              <p>{lastOrder.neighborhood} - {lastOrder.city}, {lastOrder.state}</p>
             </div>
           </Item>
           <Item variant="yellow">
@@ -31,7 +43,7 @@ const Success = () => {
             <span><CurrencyDollar size={16} weight="fill" /></span>
             <ItemInfoContainer>
               <p>Pagamento na entrega</p>
-              <p><strong>Cartão de Crédito</strong></p>
+              <p><strong>{paymentMethod[lastOrder.paymentMethod]}</strong></p>
             </ItemInfoContainer>
           </Item>
         </ItemsContainer>
