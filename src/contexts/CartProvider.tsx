@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from "react";
+import { createContext, ReactNode, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { Item } from "../@types/types";
 import { OrderInfo } from "../pages/Cart";
@@ -24,7 +24,24 @@ interface CartContextProviderProps {
 export const CartContextProvider = ({
   children,
 }: CartContextProviderProps) => {
-  const [cartState, dispatch] = useReducer(cartReducer, { cart: [], orders: [] });
+  const [cartState, dispatch] = useReducer(
+    cartReducer,
+    {
+      cart: [],
+      orders: [],
+    },
+    (cartState) => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@coffee-delivery:cart-state-1.0.0',
+      )
+
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
+      }
+
+      return cartState
+    },
+  )
   const navigate = useNavigate();
 
   const addItem = (item: Item) => {
@@ -46,6 +63,14 @@ export const CartContextProvider = ({
   const checkout = (order: OrderInfo) => {
     dispatch(checkoutAction(order, navigate))
   }
+
+  useEffect(() => {
+    if (cartState) {
+      const stateJSON = JSON.stringify(cartState)
+
+      localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateJSON)
+    }
+  }, [cartState])
 
   return (
     <CartContext.Provider value={{ cart: cartState.cart, orders: cartState.orders, addItem, removeItem, incrementItemQtd, decrementItemQtd, checkout }}>
