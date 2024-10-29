@@ -1,6 +1,6 @@
 import { FocusEvent, forwardRef, InputHTMLAttributes, useState } from "react";
 import { FieldError } from "react-hook-form";
-import { ErrorMessage, InputContainer } from "./styles";
+import { ErrorMessage, InputContainer, Box } from "./styles";
 
 export type SizeType = "default" | "full-width" | "min-width";
 
@@ -22,7 +22,7 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
     };
 
     return (
-      <>
+      <Box sizetype={sizetype}>
         <InputContainer
           isActive={isActive}
           sizetype={sizetype}
@@ -39,7 +39,7 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
         {error?.message ? (
           <ErrorMessage role="alert">{error.message}</ErrorMessage>
         ) : null}
-      </>
+      </Box>
     );
   }
 );

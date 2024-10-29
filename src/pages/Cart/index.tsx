@@ -129,19 +129,19 @@ const Cart = () => {
             </InfoContainer>
             <InputsContainer>
               <div>
-                <TextInput placeholder="CEP" sizetype="default" {...register('cep')} />
+                <TextInput placeholder="CEP" sizetype="default" error={errors.cep} {...register('cep')} />
               </div>
               <div>
-                <TextInput placeholder="Rua" sizetype="full-width" {...register('street')} />
+                <TextInput placeholder="Rua" sizetype="full-width" error={errors.street}  {...register('street')} />
               </div>
               <div>
-                <TextInput placeholder="Número" sizetype="default" {...register('number')} />
-                <TextInput placeholder="Complemento" optional {...register('fullAddress')} />
+                <TextInput placeholder="Número" sizetype="default" error={errors.number}  {...register('number')} />
+                <TextInput placeholder="Complemento" optional error={errors.fullAddress} {...register('fullAddress')} />
               </div>
               <div>
-                <TextInput placeholder="Bairro" sizetype="default" {...register('neighborhood')} />
-                <TextInput placeholder="Cidade" {...register('city')} />
-                <TextInput placeholder="UF" sizetype="min-width" {...register('state')} />
+                <TextInput placeholder="Bairro" sizetype="default" error={errors.neighborhood} {...register('neighborhood')} />
+                <TextInput placeholder="Cidade" error={errors.city} {...register('city')} />
+                <TextInput placeholder="UF" sizetype="min-width" error={errors.state} {...register('state')} />
               </div>
             </InputsContainer>
           </AddressForm>

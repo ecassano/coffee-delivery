@@ -9,14 +9,6 @@ export const InputContainer = styled.div<{
   display: flex;
   flex: ${({ sizetype }) => !sizetype && 1};
   gap: 0 !important;
-  width: ${({ sizetype }) =>
-    sizetype
-      ? sizetype === 'default'
-        ? '12.5rem'
-        : sizetype === 'full-width'
-        ? '100%'
-        : '3.75rem'
-      : 'auto'};
   background: ${props => props.theme.colors['base-input']};
   border-radius: 4px;
   border: 1px solid transparent;
@@ -69,4 +61,22 @@ export const ErrorMessage = styled.p`
   ${typography.fonts.textXS};
   font-weight: 400;
   color: red;
+  overflow-x: hidden;
+`;
+
+export const Box = styled.div<{
+  sizetype?: SizeType;
+}>`
+  display: flex;
+  flex-direction: column;
+  flex: ${({ sizetype }) => !sizetype && 1};
+  gap: 2px !important;
+  width: ${({ sizetype }) =>
+    sizetype
+      ? sizetype === 'default'
+        ? '12.5rem'
+        : sizetype === 'full-width'
+        ? '100%'
+        : '3.75rem'
+      : 'auto'};
 `;
