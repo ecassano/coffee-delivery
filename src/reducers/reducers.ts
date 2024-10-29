@@ -1,9 +1,11 @@
 import { produce } from 'immer';
 import { Actions, ActionTypes } from './actions';
 import { Item } from '../@types/types';
+import { OrderInfo } from '../pages/Cart';
 
 interface CartState {
   cart: Item[];
+  orders: OrderInfo[];
 }
 
 export const cartReducer = (state: CartState, action: Actions) => {
@@ -44,6 +46,18 @@ export const cartReducer = (state: CartState, action: Actions) => {
             item.qtd -= 1;
           }
         });
+      });
+    case ActionTypes.CHECKOUT:
+      return produce(state, draft => {
+        const newOrder = {
+          id: new Date().getTime(),
+          items: state.cart,
+          ...action.payload.order,
+        };
+        draft.orders.push(newOrder);
+        draft.cart = [];
+
+        action.payload.callback(`/order/${newOrder.id}/success`);
       });
 
     default:

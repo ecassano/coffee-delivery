@@ -4,16 +4,16 @@ import { typography } from '../../../styles/typography';
 
 export const InputContainer = styled.div<{
   isActive: boolean;
-  sizeType?: SizeType;
+  sizetype?: SizeType;
 }>`
   display: flex;
-  flex: ${({ sizeType }) => !sizeType && 1};
+  flex: ${({ sizetype }) => !sizetype && 1};
   gap: 0 !important;
-  width: ${({ sizeType }) =>
-    sizeType
-      ? sizeType === 'default'
+  width: ${({ sizetype }) =>
+    sizetype
+      ? sizetype === 'default'
         ? '12.5rem'
-        : sizeType === 'full-width'
+        : sizetype === 'full-width'
         ? '100%'
         : '3.75rem'
       : 'auto'};
@@ -63,4 +63,10 @@ export const InputContainer = styled.div<{
       display: none;
     }
   }
+`;
+
+export const ErrorMessage = styled.p`
+  ${typography.fonts.textXS};
+  font-weight: 400;
+  color: red;
 `;

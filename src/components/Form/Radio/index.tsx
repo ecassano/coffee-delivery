@@ -1,17 +1,21 @@
-import { InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes, ReactNode } from "react";
 import { RadioContainer } from "./styles";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
+  isSelected: boolean;
+  children: ReactNode;
 }
 
-const Radio = ({ id, children }: Props) => {
-  return (
-    <RadioContainer>
-      <input type="radio" name="payment-options" id={id} />
+const Radio = forwardRef<HTMLInputElement, Props>(
+  ({ id, isSelected, children, ...rest }, ref) => (
+    <RadioContainer data-state={isSelected}>
+      <input type="radio" id={id} ref={ref} {...rest} />
       <label htmlFor={id}>{children}</label>
     </RadioContainer>
   )
-}
+);
+
+Radio.displayName = "Radio";
 
 export default Radio

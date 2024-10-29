@@ -1,10 +1,13 @@
+import { NavigateFunction } from 'react-router-dom';
 import { Item } from '../@types/types';
+import { OrderInfo } from '../pages/Cart';
 
 export enum ActionTypes {
   ADD_ITEM = 'ADD_ITEM',
   REMOVE_ITEM = 'REMOVE_ITEM',
   INCREMENT_ITEM_QTD = 'INCREMENT_ITEM_QTD',
   DECREMENT_ITEM_QTD = 'DECREMENT_ITEM_QTD',
+  CHECKOUT = 'CHECKOUT',
 }
 
 export type Actions =
@@ -13,16 +16,18 @@ export type Actions =
       payload: { item: Item };
     }
   | {
-      type: ActionTypes.REMOVE_ITEM;
-      payload: { id: string };
+      type:
+        | ActionTypes.REMOVE_ITEM
+        | ActionTypes.INCREMENT_ITEM_QTD
+        | ActionTypes.DECREMENT_ITEM_QTD;
+      payload: { id: Item['id'] };
     }
   | {
-      type: ActionTypes.INCREMENT_ITEM_QTD;
-      payload: { id: string };
-    }
-  | {
-      type: ActionTypes.DECREMENT_ITEM_QTD;
-      payload: { id: string };
+      type: ActionTypes.CHECKOUT;
+      payload: {
+        order: OrderInfo;
+        callback: NavigateFunction;
+      };
     };
 
 export const addItemAction = (item: Item): Actions => ({
@@ -43,4 +48,12 @@ export const incrementItemQtdAction = (id: string): Actions => ({
 export const decrementItemQtdAction = (id: string): Actions => ({
   type: ActionTypes.DECREMENT_ITEM_QTD,
   payload: { id },
+});
+
+export const checkoutAction = (
+  order: OrderInfo,
+  callback: NavigateFunction
+): Actions => ({
+  type: ActionTypes.CHECKOUT,
+  payload: { order, callback },
 });

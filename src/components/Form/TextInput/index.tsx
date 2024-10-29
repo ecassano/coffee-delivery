@@ -1,39 +1,45 @@
-import { forwardRef, InputHTMLAttributes, useState, ChangeEvent } from "react";
-import { InputContainer } from "./styles";
+import { FocusEvent, forwardRef, InputHTMLAttributes, useState } from "react";
+import { FieldError } from "react-hook-form";
+import { ErrorMessage, InputContainer } from "./styles";
 
 export type SizeType = "default" | "full-width" | "min-width";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   id?: string;
-  sizeType?: SizeType;
+  sizetype?: SizeType;
   optional?: boolean;
+  error?: FieldError;
 }
 
 const TextInput = forwardRef<HTMLInputElement, Props>(
-  ({ optional = false, sizeType, id, ...rest }, ref) => {
-    const [inputValue, setInputValue] = useState("");
-
+  ({ optional = false, error, sizetype, id, onBlur, onFocus, ...rest }, ref) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const [isActive, setIsActive] = useState(false);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setInputValue(e.target.value);
+    const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+      setIsActive(!!e.target.value); // Verifica se o input tem valor ao perder o foco
+      if (onBlur) onBlur(e); // Chama o onBlur do react-hook-form, se fornecido
     };
 
     return (
-      <InputContainer
-        isActive={inputValue.length > 0}
-        sizeType={sizeType}
-      >
-        <input
-          type="text"
-          id={inputId}
-          ref={ref}
-          value={inputValue}
-          onChange={handleChange}
-          {...rest}
-        />
-        {optional && <label htmlFor={inputId}>Opcional</label>}
-      </InputContainer>
+      <>
+        <InputContainer
+          isActive={isActive}
+          sizetype={sizetype}
+        >
+          <input
+            type="text"
+            id={inputId}
+            ref={ref}
+            onBlur={handleBlur}
+            {...rest}
+          />
+          {optional && <label htmlFor={inputId}>Opcional</label>}
+        </InputContainer>
+        {error?.message ? (
+          <ErrorMessage role="alert">{error.message}</ErrorMessage>
+        ) : null}
+      </>
     );
   }
 );

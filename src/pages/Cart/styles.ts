@@ -23,13 +23,13 @@ export const Title = styled.h2`
   margin-bottom: 1rem;
 `;
 
-export const Forms = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 0.75rem;
-`;
+// export const Forms = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   align-items: flex-start;
+//   gap: 0.75rem;
+// `;
 
 export const AddressForm = styled(BaseForm)`
   color: ${props => props.theme.colors.yellow};
